@@ -38,20 +38,21 @@ This project implements a multi-node **CAN-based embedded system** using the **L
 
 ## 🔧 Hardware Requirements
 
-- **LPC2129 development boards** (minimum 3)
-- **CAN transceivers** (e.g., MCP2551 or SN65HVD230)
+- **LPC2129 development boards** (3)
+- **CAN transceivers** (e.g.- MCP2551)
 - **8 LEDs + Resistors** (for indicator node)
-- **16x2 LCD** (for main node display)
-- **RTC Module** (I2C-based like DS1307)
-- **DHT11 / LM35** (for temperature simulation)
-- Power supply, jumpers, connectors
+- **20x4 LCD** (for main node display)
+- **Fuel Guage** (For Fuel Node)
+- **RTC Module** 
+- **DS18B20** (for temperature simulation)
+- Power supply, jumpers, Can bus connector
 
 ---
 
 ## 🔌 Communication Protocol
 
 ### CAN Bus Configuration:
-- **Baud Rate**: Configured via CAN1/CAN2 control registers
+- **Baud Rate**: Configured via CAN1 control registers
 - **Message Format**: Standard 11-bit ID
 - **Message IDs**:
   - `0x01` – Fuel level from Fuel Node
@@ -65,6 +66,4 @@ This project implements a multi-node **CAN-based embedded system** using the **L
 | Data2     | (unused)      | Reserved for future expansion |
 
 ---
-
-## 📁 File Structure
 
