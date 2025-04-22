@@ -1,0 +1,10 @@
+interrupt1.o: interrupt1.c
+interrupt1.o: C:\KeilARM\ARM\INC\Philips\lpc21xx.h
+interrupt1.o: defines.h
+interrupt1.o: types.h
+interrupt1.o: pin_function_defines.h
+interrupt1.o: interrupt.h
+interrupt1.o: delay.h
+interrupt1.o: types.h
+interrupt1.o: can.h
+interrupt1.o: types.h

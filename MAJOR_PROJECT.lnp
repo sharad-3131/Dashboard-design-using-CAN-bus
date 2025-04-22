@@ -1,0 +1,4 @@
+--cpu ARM7TDMI "startup.o" "indicator_node.o" "can.o" "adc_driver.o" "lcd.o" "rtc.o" "delay.o" "ds18b20.o" --strict --scatter "MAJOR_PROJECT.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\MAJOR_PROJECT.map" -o "MAJOR_PROJECT.axf"

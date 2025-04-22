@@ -1,0 +1,14 @@
+.\fuel_node.o: FUEL_NODE.c
+.\fuel_node.o: delay.h
+.\fuel_node.o: types.h
+.\fuel_node.o: LCD_defines.h
+.\fuel_node.o: LCD.h
+.\fuel_node.o: types.h
+.\fuel_node.o: adc.h
+.\fuel_node.o: types.h
+.\fuel_node.o: adc_defines.h
+.\fuel_node.o: types.h
+.\fuel_node.o: interrupt.h
+.\fuel_node.o: can.h
+.\fuel_node.o: types.h
+.\fuel_node.o: can_defines.h

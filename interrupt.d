@@ -1,0 +1,11 @@
+interrupt.o: interrupt.c
+interrupt.o: C:\KeilARM\ARM\INC\Philips\LPC21xx.H
+interrupt.o: types.h
+interrupt.o: defines.h
+interrupt.o: types.h
+interrupt.o: can.h
+interrupt.o: types.h
+interrupt.o: lcd.h
+interrupt.o: types.h
+interrupt.o: delay.h
+interrupt.o: types.h
