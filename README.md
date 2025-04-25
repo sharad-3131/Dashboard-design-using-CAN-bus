@@ -1,69 +1,83 @@
-# Dashboard-design-using-CAN-bus
+# Dashboard Design using CAN Bus
 
-# 🚗 CAN-Based Automotive Dashboard System (LPC2129)
+This project demonstrates a **dashboard system for automotive applications** using the **CAN (Controller Area Network) protocol**. It displays vital vehicle data such as **engine temperature**, **fuel level**, **indicator signals**, and **real-time clock (RTC)** information via a distributed embedded network.
 
-This project implements a multi-node **CAN-based embedded system** using the **LPC2129 microcontroller**, simulating a real-time automotive dashboard. It includes three major nodes: **Main Node**, **Fuel Node**, and **Indicator Node**, communicating over the **Classical CAN protocol**. The system is designed to monitor fuel level, display real-time status on an LCD, and control turn signal indicators based on user input via CAN messages.
+## 🧠 Project Overview
 
----
+The main objectives of this project are to:
 
-## 🧠 Project Architecture
+- Display **engine temperature** using a digital sensor
+- Display **fuel percentage** via ADC
+- Indicate **left and right turns** using LEDs
+- Show **real-time clock (time, date, day)**
+- Communicate data across different modules using the **CAN protocol**
 
-### 1. **Main Node (LPC2129)**
-- Acts as the **central controller** of the system.
-- Interfaces with:
-  - **RTC** (Real Time Clock)
-  - **LCD Display**
-  - **Temperature Sensor**
-- **CAN Transmission**:
-  - Sends `"L"` or `"R"` commands to control left/right turn indicators.
-  - Periodically sends system status or dummy commands.
-- **Interrupt Handling**:
-  - Sends messages via CAN on external interrupt trigger.
+## 📦 Hardware Requirements
 
-### 2. **Fuel Node**
-- Measures **fuel level percentage** (simulated or via analog sensor).
-- Continuously transmits **fuel level via CAN**.
-- ID used: `1`
-- Data Format: Integer percentage (0–100)
+- **LPC2129 Microcontroller**
+- **CAN Transceiver (MCP2551)**
+- **LCD Display**
+- **LEDs** (for indicator signals)
+- **Switches** (to simulate indicator actions)
+- **DS18B20 Temperature Sensor**
+- **Fuel Gauge**
 
-### 3. **Indicator Node**
-- Receives `"L"` or `"R"` CAN messages with ID `2`.
-- **Controls 8 LEDs** (P0.0 to P0.7) to simulate turn indicators.
-  - `"L"`: Left pattern (0 → 7)
-  - `"R"`: Right pattern (7 → 0)
-- Toggling mechanism: same command toggles ON/OFF the pattern.
-- Fast response loop checks for new commands during blinking.
+## 💻 Software Requirements
 
----
+- **Embedded C Programming**
+- **Keil uVision (C Compiler)**
+- **Flash Magic** (for flashing code onto microcontroller)
 
-## 🔧 Hardware Requirements
+## 🛠️ System Architecture
 
-- **LPC2129 development boards** (3)
-- **CAN transceivers** (e.g.- MCP2551)
-- **8 LEDs + Resistors** (for indicator node)
-- **20x4 LCD** (for main node display)
-- **Fuel Guage** (For Fuel Node)
-- **RTC Module** 
-- **DS18B20** (for temperature simulation)
-- Power supply, jumpers, Can bus connector
+The system is composed of **three CAN nodes**:
 
----
+1. **Main Node**
+   - Reads engine temperature using **DS18B20 sensor**
+   - Displays **temperature, fuel level, indicator status, and RTC** on an **LCD**
+   - Sends **indicator commands** to the Indicator Node
+   - Receives **fuel level data** from the Fuel Node
+   - Continuously updates and displays **time/date/day** via RTC
 
-## 🔌 Communication Protocol
+2. **Fuel Node**
+   - Reads analog **fuel gauge** using on-chip ADC
+   - Sends **fuel percentage data** to the Main Node over CAN
 
-### CAN Bus Configuration:
-- **Baud Rate**: Configured via CAN1 control registers
-- **Message Format**: Standard 11-bit ID
-- **Message IDs**:
-  - `0x01` – Fuel level from Fuel Node
-  - `0x02` – Indicator control from Main Node
+3. **Indicator Node**
+   - Receives commands from Main Node via CAN
+   - Controls **left and right indicator LEDs** accordingly
 
-### CAN Frame Structure:
-| Field     | Value Example | Description                   |
-|-----------|---------------|-------------------------------|
-| ID        | 0x01 / 0x02   | Sender type (Fuel / Main)     |
-| Data1     | `'L'` / `'R'` | Command or value              |
-| Data2     | (unused)      | Reserved for future expansion |
+## 🔁 Implementation Steps
 
----
+1. Create a working folder and organize project files
+2. Test each hardware component individually:
+   - **LCD**: Display static and dynamic content
+   - **ADC**: Read voltage from fuel sensor
+   - **Temperature Sensor (DS18B20)**: Read and display engine temperature
+   - **RTC Module**: Display time, date, and day
+   - **External Interrupts**: Test EINT0 & EINT1 for indicator simulation
+   - **CAN Communication**: Use sample CAN code for initial testing
+
+3. Integrate the modules:
+   - **Main Node**:
+     - Reads data from sensors
+     - Sends/receives CAN messages
+     - Displays everything on LCD
+   - **Fuel Node**:
+     - Sends periodic fuel level data
+   - **Indicator Node**:
+     - Responds to interrupt-triggered CAN messages from the main node
+
+## 🖼️ Block Diagram
+
+![CAN Bus Dashboard System Block Diagram](block-diagram.png)
+
+
+## ✅ Completion Criteria
+
+The project is considered complete if:
+
+- **Engine temperature**, **fuel level**, and **RTC** data are shown on the LCD
+- **Left/right indicator LEDs** are controlled via interrupts and reflect on the LCD
+- CAN-based **communication between all nodes** is successful and responsive
 
